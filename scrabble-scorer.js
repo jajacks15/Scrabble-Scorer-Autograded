@@ -3,56 +3,81 @@
 const input = require("readline-sync");
 
 const oldPointStructure = {
-  1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
-  2: ['D', 'G'],
-  3: ['B', 'C', 'M', 'P'],
-  4: ['F', 'H', 'V', 'W', 'Y'],
-  5: ['K'],
-  8: ['J', 'X'],
-  10: ['Q', 'Z']
+   1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
+   2: ['D', 'G'],
+   3: ['B', 'C', 'M', 'P'],
+   4: ['F', 'H', 'V', 'W', 'Y'],
+   5: ['K'],
+   8: ['J', 'X'],
+   10: ['Q', 'Z']
 };
 
+
 function oldScrabbleScorer(word) {
-	word = word.toUpperCase();
-	let letterPoints = "";
- 
-	for (let i = 0; i < word.length; i++) {
- 
-	  for (const pointValue in oldPointStructure) {
- 
-		 if (oldPointStructure[pointValue].includes(word[i])) {
-			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
-		 }
- 
-	  }
-	}
-	return letterPoints;
- }
+   word = word.toUpperCase();
+   let letterPoints = "";
+
+   for (let i = 0; i < word.length; i++) {
+
+      for (const pointValue in oldPointStructure) {
+
+         if (oldPointStructure[pointValue].includes(word[i])) {
+            letterPoints += `Points for '${word[i]}': ${pointValue}\n`
+         }
+
+      }
+   }
+   return letterPoints;
+}
 
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
 
 function initialPrompt() {
-   console.log("Let's play some scrabble! Enter a word:");
+   let userInput = input.question("Let's play some scrabble! Enter a word to score: ");
+   return oldScrabbleScorer(userInput);
+};
+// console.log(initialPrompt());
+
+let simpleScorer = function (word) {
+
+   let pointCount = word.length;
+
+   return pointCount;
 };
 
-let simpleScorer;
+let vowelBonusScorer = function (word) {
+   //  word.toUpperCase(); (This won't work for some reason, so I've made vowels case insensitive manually).
+   let vowels = ["a", "A", "e", "E", "i", "I", "o", "O", "u", "U"];
+   let pointCount = Number("");
 
-let vowelBonusScorer;
+   for (i = 0; i < word.length; i++) {
+
+      if (vowels.includes(word[i])) {
+         pointCount += 3;
+      } else {
+         pointCount += 1;
+      }
+   }
+   return pointCount;
+};
+
+console.log(vowelBonusScorer("Pop"));
+// word[i] == "A" || word[i] == "E" || word[i] == "I" || word[i] == "O" || word[i] == "U" )
 
 let scrabbleScorer;
 
 const scoringAlgorithms = [];
 
-function scorerPrompt() {}
+function scorerPrompt() { }
 
-function transform() {};
+function transform() { };
 
 let newPointStructure;
 
 function runProgram() {
    initialPrompt();
-   
+
 }
 
 // Don't write any code below this line //
@@ -66,6 +91,6 @@ module.exports = {
    scrabbleScorer: scrabbleScorer,
    scoringAlgorithms: scoringAlgorithms,
    newPointStructure: newPointStructure,
-	runProgram: runProgram,
-	scorerPrompt: scorerPrompt
+   runProgram: runProgram,
+   scorerPrompt: scorerPrompt
 };
