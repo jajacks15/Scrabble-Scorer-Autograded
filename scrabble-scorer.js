@@ -47,8 +47,8 @@ let simpleScorer = function (word) {
 };
 
 let vowelBonusScorer = function (word) {
-   //  word.toUpperCase(); (This won't work for some reason, so I've made vowels case insensitive manually).
-   let vowels = ["a", "A", "e", "E", "i", "I", "o", "O", "u", "U"];
+   word = word.toUpperCase(); 
+   let vowels = ["A", "E", "I", "O", "U"];
    let pointCount = Number("");
 
    for (i = 0; i < word.length; i++) {
@@ -62,8 +62,7 @@ let vowelBonusScorer = function (word) {
    return pointCount;
 };
 
-console.log(vowelBonusScorer("Pop"));
-// word[i] == "A" || word[i] == "E" || word[i] == "I" || word[i] == "O" || word[i] == "U" )
+console.log(vowelBonusScorer("Julian"));
 
 let scrabbleScorer;
 
